@@ -1,0 +1,37 @@
+﻿program P
+var a,b: integer;
+var d:char
+const pai=3.14;
+const e=2.8
+	procedure Q(b: integer)
+	var c: integer
+		procedure R(u:integer; var v:integer)
+		var d, e: real
+		begin
+			d:=2;e:=3;
+			if u==2 then
+				begin 
+					u:=u+d;d:=d*2;if u<=v then u:=u+1
+				end 
+			else                                                  
+			v:= d+(e-u)                         
+		end
+		endp
+        begin
+                call R(c,1)                        
+        end
+	endp
+     	procedure S(xx:char;yy:char;zz:char)
+       	var i, j: integer
+        begin
+          	i:=23.3 ;
+		call Q(i)                             
+        end
+	endp
+begin
+	d:='%';
+	while a>b do begin a:=a*(pai-1);while a>0 do a:=a-1 end;
+	while a>0 do begin a:=a-1;b:=b/2 end;
+	call Q(a);
+	call S(a,b,a)
+end
