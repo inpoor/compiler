@@ -29,10 +29,24 @@
     <ClInclude Include="resource.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="SyntexAnalysis.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="total.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbolTable.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="compiler.rc">
       <Filter>資源檔</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="pro.txt">
+      <Filter>資源檔</Filter>
+    </Text>
   </ItemGroup>
 </Project>

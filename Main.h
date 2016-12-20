@@ -1,7 +1,6 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 #include<iostream>
-#include"LexicalAnalysis.h"
 #include<string>
 #include<vector>
 #include<stack>
@@ -14,11 +13,9 @@
 #include<conio.h>
 #include <string>
 #include <sstream> 
-
 using namespace std;
 
-
-char *kt[20]={ "program", "var", "integer", "real", "char", "begin", "end", "if", "then", "else", "while", "do", "ifend", "whend", "const", "procedure", "call", "param", "ret", "endp"};		//kt表的内容
+char *kt[22]={ "program", "var", "integer", "real", "char", "begin", "end", "if", "then", "else", "while", "do", "ifend", "whend", "const", "function", "call", "param", "ret", "endf","procedure","endp"};		//kt表的内容
 char *pt[19]={",", ":", ";", ":=", "*", "/", "+", "-", ".", "(", ")", "\'", ">", "<", "==", ">=", "<=", "!=", "=" };		//pt表的内容
 //常数处理机状态转换矩阵
 int CSCLStatus[9][5] = { {}, { 2, 0, 0, 0, 0 }, { 2, 3, 5, 0, 8 }, { 4, 0, 0, 0, 0 }, { 4, 0, 5, 0, 8 }, { 7, 0, 0, 6, 0 }, { 7, 0, 0, 0, 0 }, { 7, 0, 0, 0, 8 }, { 0, 0, 0, 0, 0 } };

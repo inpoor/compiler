@@ -1,4 +1,4 @@
-#ifndef _LEXICALANALYSIS_H_
+ï»¿#ifndef _LEXICALANALYSIS_H_
 #define _LEXICALANALYSIS_H_
 #define iTAndKT 20
 #define cT 21
@@ -6,19 +6,20 @@
 #define CT 23
 #define PT 24
 #include "Main.h"
+class SyntexAnalysis;
 class LexicalAnalysis{
 private:
 struct Token Token_T[300];
 struct Token ptCache[150];
 struct Token ktCache[150];
-int Tokenlen;      //TokenµÄ³¤¶È
-int pt_Tokenlen;		//pt_TokenlenµÄ³¤¶È
-int kt_Tokenlen;		//kt_TokenlenµÄ³¤¶È
-int flag;		//ÊäÈë³ÌĞòµÄĞòºÅ
+int Tokenlen;      //Tokençš„é•¿åº¦
+int pt_Tokenlen;		//pt_Tokenlençš„é•¿åº¦
+int kt_Tokenlen;		//kt_Tokenlençš„é•¿åº¦
+int flag;		//è¾“å…¥ç¨‹åºçš„åºå·
 int id_kt;
 int id_pt;
-string it[100];			//it±íµÄÄÚÈİ
-string ct[100];			//ct±íµÄÄÚÈİ
+string it[100];			//itè¡¨çš„å†…å®¹
+string ct[100];			//ctè¡¨çš„å†…å®¹
 int CT_Table[100];
 int  id_it;
 int id_ct;
@@ -41,11 +42,13 @@ int SearchKt(string Word);
 int SearchPt(string str);
 int Scanning();
 void print_Token();
+int GetTokenLen(){return Tokenlen;};
+Token GetTokenById(int id){return Token_T[id];};
 LexicalAnalysis(){
- Tokenlen = 0;      //TokenµÄ³¤¶È
- pt_Tokenlen=0;		//pt_TokenlenµÄ³¤¶È
- kt_Tokenlen=0;		//kt_TokenlenµÄ³¤¶È
- flag=3;		//ÊäÈë³ÌĞòµÄĞòºÅ
+ Tokenlen = 0;      //Tokençš„é•¿åº¦
+ pt_Tokenlen=0;		//pt_Tokenlençš„é•¿åº¦
+ kt_Tokenlen=0;		//kt_Tokenlençš„é•¿åº¦
+ flag=3;		//è¾“å…¥ç¨‹åºçš„åºå·
  id_kt=4;
  id_pt=24;
   id_it=0;
@@ -71,36 +74,36 @@ int LexicalAnalysis::TxtToSring(char* a){
 		return 1;
  }
 
-//ÅĞ¶Ï×Ö·ûÔÚkt±íµÄÎ»ÖÃ
-int LexicalAnalysis::SearchKt(string Word){
-	for(int i=0;i<20;i++){
-		if(strcmp(kt[i],Word.c_str())==0){	 
-			return id_kt+i;		 
+//åˆ¤æ–­å­—ç¬¦åœ¨ktè¡¨çš„ä½ç½®
+int LexicalAnalysis::SearchKt(string State){
+	for(int i=0;i<kt_Tokenlen;i++){
+		if(strcmp(State.c_str(),ktCache[i].state.c_str())==0){
+			return ktCache[i].token;		
 		}
 	}
 	return -1;
 }
 
-//ÅĞ¶Ï×Ö·ûÔÚpt±ídµÄÎ»ÖÃ
-int LexicalAnalysis::SearchPt(string str){
-for(int i=0;i<19;i++){
-	if(strcmp(pt[i],str.c_str())==0){
-		return id_pt+i;		  
+//åˆ¤æ–­å­—ç¬¦åœ¨ptè¡¨dçš„ä½ç½®
+int LexicalAnalysis::SearchPt(string State){
+for(int i=0;i<pt_Tokenlen;i++){
+		if(strcmp(State.c_str(),ptCache[i].state.c_str())==0){
+			return ktCache[i].token+20;		
 		}
 	}
 	return -1;
 }
 
-//ÅĞ¶Ï×Ö·ûÊÇ·ñÔÚkt±í
+//åˆ¤æ–­å­—ç¬¦æ˜¯å¦åœ¨ktè¡¨
 bool LexicalAnalysis::JudgeKt(string Word){
-	for(int i=0;i<20;i++){
+	for(int i=0;i<22;i++){
 		if(strcmp(kt[i],Word.c_str())==0){	 
 		  return 1;		 
 		}
 	}
 	return 0;
 }
-//ÅĞ¶Ï×Ö·ûÊÇ·ñÔÚpt±í
+//åˆ¤æ–­å­—ç¬¦æ˜¯å¦åœ¨ptè¡¨
 bool LexicalAnalysis::JudgePt(string str){
 for(int i=0;i<19;i++){
 	if(strcmp(pt[i],str.c_str())==0){
@@ -109,7 +112,7 @@ for(int i=0;i<19;i++){
 	}
 	return 0;
 }
-//½¨Á¢µ±Ç°½×¶ÎÒÑÓĞµÄktµÄ»º´æÊı¾İ
+//å»ºç«‹å½“å‰é˜¶æ®µå·²æœ‰çš„ktçš„ç¼“å­˜æ•°æ®
 int LexicalAnalysis::kt_cache(string State){
 	for(int i=0;i<kt_Tokenlen;i++){
 		if(strcmp(State.c_str(),ktCache[i].state.c_str())==0){
@@ -118,7 +121,7 @@ int LexicalAnalysis::kt_cache(string State){
 	}
 	return 0;
 }
-//½¨Á¢µ±Ç°½×¶ÎÒÑÓĞµÄptµÄ»º´æÊı¾İ
+//å»ºç«‹å½“å‰é˜¶æ®µå·²æœ‰çš„ptçš„ç¼“å­˜æ•°æ®
 int LexicalAnalysis::pt_cache(string State){
 	for(int i=0;i<pt_Tokenlen;i++){
 		if(strcmp(ptCache[i].state.c_str(),State.c_str())==0){	  
@@ -196,7 +199,7 @@ void LexicalAnalysis::GetToken(int Token_id,string State){
 }
 
 
-//»ñµÃÏÂÒ»¸ö×Ö·û
+//è·å¾—ä¸‹ä¸€ä¸ªå­—ç¬¦
 char LexicalAnalysis::GetNextChar(char *a){
 	
 	char ch;
@@ -211,30 +214,30 @@ char LexicalAnalysis::GetNextChar(char *a){
 	return ch;
 	}
 }
-//ÍËµ¹ÉÏÒ»¸ö×Ö·û
+//é€€å€’ä¸Šä¸€ä¸ªå­—ç¬¦
 void LexicalAnalysis::GetBackChar(){
       flag--;
 }
 
-//ÅĞ¶Ï¸Ã×Ö·ûÊÇ·ñÎªÊı×Ö
-bool LexicalAnalysis::IsNumber(char c){
-	if(c>=48&&c<=58){
+//åˆ¤æ–­è¯¥å­—ç¬¦æ˜¯å¦ä¸ºæ•°å­—
+bool LexicalAnalysis::IsNumber(char ch){
+	if (ch >= '0'&&ch <= '9'){
 	   return 1;
 	}else
 	{
 	return 0;
 	}
 }
-//ÅĞ¶Ï¸Ã×Ö·ûÊÇ·ñÎªÓ¢ÎÄ×ÖÄ¸
-bool LexicalAnalysis::IsLetter(char a){
-	if(isalpha(a)==1||isalpha(a)==2){
+//åˆ¤æ–­è¯¥å­—ç¬¦æ˜¯å¦ä¸ºè‹±æ–‡å­—æ¯
+bool LexicalAnalysis::IsLetter(char ch){
+	if ((ch >= 'a'&&ch <= 'z') || (ch >= 'A'&&ch <= 'Z')){
 	return 1;
 	}
 	else
 		return 0;
 }
 
-//´Ê·¨·ÖÎöµÄ×Ô¶¯»ú
+//è¯æ³•åˆ†æçš„è‡ªåŠ¨æœº
 void LexicalAnalysis::DFA(char *Pro){
 		
 	bool IsSave;
@@ -276,28 +279,42 @@ void LexicalAnalysis::DFA(char *Pro){
 			}
 			break;
         case 2:
-            if(!IsLetter(c)&&!IsNumber(c)){
+            if((!IsLetter(c)&&!IsNumber(c))||c==':'){
 			
                 CurrentState=20;
                 GetBackChar();
                 IsSave=false;			
             }
+		/*	else if(c==':'){
+				CurrentState=51;			
+			    GetBackChar();
+                IsSave=false;	
+			}*/
 			break;
 
-		case 50:
+		case 50: 
+		
 			 if(c=='='){			
-                CurrentState=6;		
-            }
-
+               	CurrentState=51;
+				 
+			 }else {
+				 
+			  CurrentState=PT;
+              GetBackChar();
+              IsSave=false;		 
+			 }
 			break;
+		case 51:
+			 CurrentState=PT;
+              GetBackChar();
+              IsSave=false;
+			  break;
 	 	case iTAndKT:
 			
 			if(JudgeKt(TokenStr)){
-				Token_id=4;
-				
+				Token_id=4;				
 			}
-			else{
-				
+			else{				
 			  Token_id=0;
 			}
 			CurrentState=0;
@@ -309,7 +326,7 @@ void LexicalAnalysis::DFA(char *Pro){
             if(c=='.'){
                  CurrentState=8;
             }
-            else if(!IsNumber(c)&&c!='.'){
+            else if((!IsNumber(c)&&c!='.')||c==':'){
                 CurrentState=23;
                 GetBackChar();
                 IsSave=false;
@@ -473,7 +490,6 @@ void LexicalAnalysis::print_Token(){
 	 i++;
  }
 }
-
 
 
 

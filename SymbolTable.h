@@ -1,10 +1,8 @@
-#include"total.h"
+#ifndef _SYMBOLTABLE_H_
+#define _SYMBOLTABLE_H_
+#include "Main.h"
 
-
-//关键字表
-
-//符号表类
-/*class SymbolTable
+class SymbolTable
 {
 public:
 	vector<SYNBL_TYPE>SYNBL;//符号表总表
@@ -17,15 +15,16 @@ public:
 	
 	//构造函数，初始化类型表已有的类型
 	SymbolTable()
-	{   TAPEL_TYPE node;
+	{
+		TAPEL_TYPE node;
 		for (int i = 0; i < 6; i++)
-			TAPEL_TYPE node={(TVAL_TYPE)i,-1};
+			TAPEL_TYPE node={ (TVAL_TYPE)i, -1 };
 			TAPEL.push_back(node);
 	}
 
 	//符号表总表表尾插入名为name、其他为空的表项，返回当前插入位置
 	int InsertSYNBL(string name)
-	{   SYNBL_TYPE node ={ name, (TVAL_TYPE)-1, (CAT_TYPE)-1, -1 };
+	{   SYNBL_TYPE node = { name, (TVAL_TYPE)-1, (CAT_TYPE)-1, -1 };
 		SYNBL.push_back(node);
 		return(SYNBL.size() - 1);
 	}
@@ -61,7 +60,7 @@ public:
 
 	//函数信息表插入level，off=3的表项
 	int InsertPFINFL(int level)
-	{   PFINFL_TYPE node = { level, 3, -1, -1, -1 };
+	{   PFINFL_TYPE node ={level, 3, -1, -1, -1};
 		PFINFL.push_back(node);
 		return(PFINFL.size() - 1);
 	}
@@ -101,15 +100,4 @@ public:
 };
 
 
-class SyntaxAnalysis{
-public:
-	int parser(Token &Tk){
-	
-	}
-};*/
-	void main(){
-		SyntexAnalysis a;
-		a.Parser();
-		system("pause");
-
-}
+#endif
